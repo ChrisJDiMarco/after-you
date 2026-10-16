@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>After You</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head>
+<body>
+  <header class="titlebar">
+    <div class="brand"><span class="brand-mark">↗<br>↙</span><span>After You<span class="brand-note">THE ART OF THE OFFER</span></span></div>
+    <nav aria-label="Game controls"><button id="sound" aria-label="Mute sound" title="Mute sound">Sound on</button><button id="rules">How to play</button><button id="new-game" class="outline">New match</button></nav>
+  </header>
+  <main>
+    <div class="scoreboard" aria-label="Score">
+      <section id="amber-score" class="player amber"><span class="player-medal">A</span><div><span class="player-name">Amber</span><span class="score-pips" id="amber-pips"></span></div><strong id="score-0">0</strong></section>
+      <div class="match-label"><span id="match-mode">TWO PEOPLE · ONE TABLE</span><span id="round">Offer 1 of 24</span><small>First to four</small></div>
+      <section id="blue-score" class="player blue"><strong id="score-1">0</strong><div><span class="player-name">Blue</span><span class="score-pips" id="blue-pips"></span></div><span class="player-medal">B</span></section>
+    </div>
+    <div id="stage" aria-label="Three-dimensional game table. Select two numbered pucks, then drag from the first puck to aim."></div>
+    <div class="view-tools" aria-label="Camera controls"><button id="perspective" class="active" aria-pressed="true">Table view</button><button id="overhead" aria-pressed="false">Overhead</button><span>Right-drag to orbit · Scroll to zoom</span></div>
+    <div id="toast" role="status"></div>
+    <section class="turn-panel" aria-live="polite" aria-atomic="true">
+      <div class="turn-copy"><div class="eyebrow"><span id="turn-dot"></span><span id="turn-owner">AMBER’S OFFER</span></div><h1 id="instruction">Choose your two possibilities.</h1><p id="hint">Click any two pucks. They belong to both of you.</p></div>
+      <div class="offer-panel">
+        <div class="selection"><span id="pick-a" class="pick-slot">—</span><span class="opposite">⇄</span><span id="pick-b" class="pick-slot">—</span><button id="clear" disabled>Clear</button></div>
+        <div class="power-row"><span>Strength</span><div class="power-track"><div id="power-fill"></div></div><output id="power-value">—</output></div>
+        <div id="choice-actions" hidden><button id="choose-a">Release 1</button><button id="choose-b">Release 2</button></div>
+      </div>
+    </section>
+    <footer><span id="footer-note">Every puck is shared. Each corner has an owner.</span><button id="example">Try the clever bit ↗</button></footer>
+  </main>
+  <dialog id="rules-dialog">
+    <form method="dialog"><button class="close" aria-label="Close rules">×</button></form>
+    <span class="eyebrow">A GAME OF TWO POSSIBILITIES</span><h2>You offer.<br>They choose.</h2>
+    <p class="lede">All nine pucks are shared. Amber owns two opposite corners. Blue owns the other two.</p>
+    <ol class="rules-list"><li><strong>Pick two pucks.</strong><span>Click any two on the table.</span></li><li><strong>Make an offer.</strong><span>Drag forward from the first puck. Both arrows have the same strength and opposite directions. Release to commit.</span></li><li><strong>Hand over the choice.</strong><span>Your opponent clicks one of the highlighted pucks to launch it. The other stays, unless something hits it.</span></li><li><strong>Watch the consequences.</strong><span>A pocket scores for its owner, whoever took the shot. Once everything stops, your opponent makes the next offer.</span></li></ol>
+    <p class="fine">First to four wins, checked after the whole shot settles. If both reach four, the higher score wins; equal scores draw. At twelve offers each, the higher score wins. You can cancel an uncommitted drag by returning to its puck, or pressing Escape.</p>
+    <button id="rules-example" class="primary">Play the example</button><button id="rules-close" class="text-button">Back to the table</button>
+  </dialog>
+  <dialog id="confirm-dialog"><h2>A fresh table?</h2><p>The current match will end.</p><div class="dialog-actions"><button id="confirm-cancel">Keep playing</button><button id="confirm-new" class="primary">New match</button></div></dialog>
+  <dialog id="end-dialog"><span class="eyebrow">THE TABLE HAS SPOKEN</span><h2 id="end-title">Amber wins.</h2><p id="end-score"></p><p class="lede">Which choice would you make differently?</p><button id="rematch" class="primary">Play again</button><button id="end-close" class="text-button">Look at the table</button></dialog>
+  <div id="fatal" hidden role="alert"><h2>The table couldn’t open.</h2><p id="fatal-detail"></p><button id="retry">Try again</button></div>
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
